@@ -1,0 +1,2 @@
+beartype==0.16.2
+typeguard==4.1.5
