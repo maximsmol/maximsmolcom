@@ -14,3 +14,8 @@ class TestType: ...
 
 
 ArrayOfTest: TypeAlias = List["TestType"]
+
+# using Python 3.12
+type JsonValue312 = (
+    int | float | str | bool | None | list[JsonValue312] | dict[str, JsonValue312]
+)

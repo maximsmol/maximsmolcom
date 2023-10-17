@@ -1,6 +1,6 @@
 import sys
-from types import FrameType
-from typing import ForwardRef, Union, get_args, get_origin
+from types import FrameType, UnionType
+from typing import ForwardRef, Union, get_args, get_origin, TypeAliasType
 
 forward_frames: dict[int, FrameType] = {}
 real_init = ForwardRef.__init__
@@ -24,9 +24,21 @@ ForwardRef.__init__ = init
 
 def check_type(value: object, type) -> bool:
     origin = get_origin(type)
-    if origin is Union:
+    if origin is Union or origin is UnionType:
         args = get_args(type)
         return any(check_type(value, x) for x in args)
+
+    if isinstance(type, TypeAliasType):
+        return check_type(value, type.__value__)
+
+    if isinstance(type, ForwardRef):
+        frame = forward_frames[id(type)]
+
+        next = frame.f_globals.get(type.__forward_arg__)
+        if next is None:
+            next = frame.f_locals[type.__forward_arg__]
+
+        return check_type(value, next)
 
     if origin is list:
         field_type = get_args(type)[0]
@@ -40,15 +52,6 @@ def check_type(value: object, type) -> bool:
             check_type(k, key_type) and check_type(v, field_type)
             for k, v in value.items()
         )
-
-    if isinstance(type, ForwardRef):
-        frame = forward_frames[id(type)]
-
-        next = frame.f_globals.get(type.__forward_arg__)
-        if next is None:
-            next = frame.f_locals[type.__forward_arg__]
-
-        return check_type(value, next)
 
     if isinstance(value, type):
         return True
