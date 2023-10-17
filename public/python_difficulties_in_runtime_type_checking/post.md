@@ -417,7 +417,7 @@ typing.Union[int, typing.List[str]]
 
 ## Reproducibility
 
-[Code repository available on GitHub](https://github.com/maximsmol/maximsmolcom/tree/f1677c5c15441ab2568bd8e93845123195b70cc1/public/python_difficulties_in_runtime_type_checking)
+[Code repository available on GitHub](https://github.com/maximsmol/maximsmolcom/tree/59a805382e5cae4144ce26ebbc49b793c90ea873/public/python_difficulties_in_runtime_type_checking)
 
 All experiments were done with
 
