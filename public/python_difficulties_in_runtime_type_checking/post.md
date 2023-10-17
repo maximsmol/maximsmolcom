@@ -168,7 +168,7 @@ Here is a rough outline of what happens:
 
 1. At this point Beartype and the standard library throw an error and Typeguard silently ignores the type and prints a warning.
 
-To fix this, we need to **find a way to reliably resolve `typing.ForwardRef` to its target, regardles of what is available in scope.** This is our ultimate goal.
+To fix this, we need to **find a way to reliably resolve `typing.ForwardRef` to its target, regardless of what is available in scope.** This is our ultimate goal.
 
 ## Investigating
 
