@@ -4,7 +4,7 @@ from type_check import check_type
 import json
 from typeguard import check_type as tg_check_type
 from fn import test, test_beartype, test_beartype_simple
-from json_type import TestType
+from json_type import TestType, JsonValue312
 
 # all of these typecheck
 test(1)
@@ -63,4 +63,14 @@ assert check_type(False, JsonVal)
 assert check_type(None, JsonVal)
 assert check_type([1, 2, 3], JsonVal)
 assert check_type({"hello": "world"}, JsonVal)
+print("  All good")
+
+# ---
+print("\nTrying Python 3.12 `type JsonValue = ...`:")
+assert check_type(1, JsonValue312)
+assert check_type("hello", JsonValue312)
+assert check_type(False, JsonValue312)
+assert check_type(None, JsonValue312)
+assert check_type([1, 2, 3], JsonValue312)
+assert check_type({"hello": "world"}, JsonValue312)
 print("  All good")
