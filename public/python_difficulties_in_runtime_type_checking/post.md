@@ -295,6 +295,7 @@ Unfortunately, neither `beartype` nor `typeguard` support it yet.<br/>[`Mypy` al
 
 I'm leaving the following rant as-is for the following reasons:
 
+- Most projects are not going to be able to switch to Python 3.12 for a long while (until all their dependencies update)
 - The overall message regarding future typing PEPs still stands.
   - It lists some reasons why PEP 695 is so good.
   - There are similar issues in other parts of the standard `typing` module.
